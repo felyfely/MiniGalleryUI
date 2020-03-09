@@ -23,29 +23,15 @@ class MiniGalleryVideoPageViewController: UIPageViewController, UIPageViewContro
         setViewControllers([videoPlayerController], direction: forward ? .forward : .reverse, animated: true, completion: nil)
     }
     
-    func next(of item: GalleryItem) -> GalleryItem? {
-        if let index = items.firstIndex(of: item), (index + 1) < items.count {
-            return items[index + 1]
-        }
-        return nil
-    }
-    
-    func previous(of item: GalleryItem) -> GalleryItem? {
-        if let index = items.firstIndex(of: item), (index - 1) >= 0 {
-            return items[index - 1]
-        }
-        return nil
-    }
-    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let controller = viewController as? MiniGalleryVideoPlayerController, let previousItem = previous(of: controller.item) {
+        if let controller = viewController as? MiniGalleryVideoPlayerController, let previousItem = items.previous(of: controller.item) {
             return MiniGalleryVideoPlayerController.init(item: previousItem)
         }
         return nil
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let controller = viewController as? MiniGalleryVideoPlayerController, let nextItem = next(of: controller.item) {
+        if let controller = viewController as? MiniGalleryVideoPlayerController, let nextItem = items.next(of: controller.item) {
             return MiniGalleryVideoPlayerController.init(item: nextItem)
         }
         return nil

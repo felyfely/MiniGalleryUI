@@ -61,12 +61,12 @@
 			isa = PBXGroup;
 			children = (
 				5B71E17B24160B730042F7EB /* README.md */,
-				5BA69F532415427900D3F284 /* MiniGalleryUI.storyboard */,
 				5BA69F582415427900D3F284 /* MiniGalleryUIServiceProvider.swift */,
-				5BA69F542415427900D3F284 /* MiniGalleryUIUtils.swift */,
+				5BA69F562415427900D3F284 /* MiniGalleryViewController.swift */,
 				5BA69F552415427900D3F284 /* MiniGalleryVideoPageViewController.swift */,
 				5BA69F572415427900D3F284 /* MiniGalleryVideoPlayerController.swift */,
-				5BA69F562415427900D3F284 /* MiniGalleryViewController.swift */,
+				5BA69F542415427900D3F284 /* MiniGalleryUIUtils.swift */,
+				5BA69F532415427900D3F284 /* MiniGalleryUI.storyboard */,
 				5BA69F4B2415421000D3F284 /* MiniGalleryUI.h */,
 				5BA69F4C2415421000D3F284 /* Info.plist */,
 			);

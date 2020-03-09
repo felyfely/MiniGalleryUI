@@ -37,31 +37,20 @@ class MiniGalleryCollectionViewCoverCell: UICollectionViewCell {
     }
 }
 
-class MiniGalleryViewModel {
-    var items = [GalleryItem]()
-    func item(at index: Int) -> GalleryItem? {
-        if index >= 0, index < items.count {
-            return items[index]
-        }
-        return nil
-    }
-    
-    func index(of item: GalleryItem) -> Int? {
-        return items.firstIndex(of: item)
-    }
+public protocol MiniGallerySelectionDelegate: class {
+    func didSelect(item: GalleryItem, at index: Int, from viewController: UIViewController)
 }
 
 class MiniGalleryViewController: UIViewController {
     
-    weak var pageController: MiniGalleryVideoPageViewController?
-    
-    lazy var viewModel = MiniGalleryViewModel()
-    
+    var items = [GalleryItem]()
+
     var lastSelectedIndexPath: IndexPath?
     
-    var flowLayout: UICollectionViewFlowLayout? {
-        return collectionView.collectionViewLayout as? UICollectionViewFlowLayout
-    }
+    weak var delegate: MiniGallerySelectionDelegate?
+    
+    // top page component
+    weak var pageController: MiniGalleryVideoPageViewController?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -69,12 +58,12 @@ class MiniGalleryViewController: UIViewController {
         if let pageController = segue.destination as? MiniGalleryVideoPageViewController {
             self.pageController = pageController
             pageController.selectionDelegate = self
-            pageController.set(items: viewModel.items)
+            pageController.set(items: items)
         }
     }
     
     func set(items: [GalleryItem]) {
-        viewModel.items = items
+        self.items = items
     }
     
     override func viewDidLoad() {
@@ -87,6 +76,8 @@ class MiniGalleryViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.decelerationRate = .fast
+        
+        // add select action to next runloop
         DispatchQueue.main.async {
             self.select(at: IndexPath.init(row: 0, section: 0), selectPage: false)
         }
@@ -106,7 +97,7 @@ class MiniGalleryViewController: UIViewController {
             }
         }
         
-        if selectPage, let item = viewModel.item(at: indexPath.row) {
+        if selectPage, let item = items.element(of: indexPath.row) {
             pageController?.select(at: item, forward: indexPath.row > (lastSelectedIndexPath?.row ?? 0))
         }
         lastSelectedIndexPath = indexPath
@@ -114,7 +105,7 @@ class MiniGalleryViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        flowLayout?.invalidateLayout()
+        collectionView.collectionViewLayout.invalidateLayout()
         collectionView.contentInset = .init(top: 0, left: collectionView.frame.width / 4, bottom: 0, right: collectionView.frame.width / 4)
     }
     
@@ -127,12 +118,12 @@ class MiniGalleryViewController: UIViewController {
 extension MiniGalleryViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.items.count
+        return items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MiniGalleryCollectionViewCoverCell.reuseIdentifer, for: indexPath) as! MiniGalleryCollectionViewCoverCell
-        viewModel.item(at: indexPath.row).flatMap { cell.bind(model: $0)}
+        items.element(of: indexPath.row).flatMap { cell.bind(model: $0)}
         return cell
     }
     
@@ -151,6 +142,7 @@ extension MiniGalleryViewController: UICollectionViewDataSource, UICollectionVie
         return 0
     }
     
+    /// change paging behaviour
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         guard let collectionView = scrollView as? UICollectionView else { return }
         let proposedContentOffset = targetContentOffset.pointee
@@ -166,7 +158,7 @@ extension MiniGalleryViewController: UICollectionViewDataSource, UICollectionVie
 
 extension MiniGalleryViewController: GalleryPageSelectionDelegate {
     func didSelect(at item: GalleryItem) {
-        if let index = viewModel.index(of: item) {
+        if let index = items.firstIndex(of: item) {
             select(at: IndexPath.init(row: index, section: 0), selectPage: false)
         }
     }

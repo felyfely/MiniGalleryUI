@@ -9,10 +9,13 @@
 import Foundation
 import UIKit
 
-open class MiniGalleryUIServiceProvider {
-    open class func getMiniGalleryUIViewController(items: [GalleryItem]) -> UIViewController {
+open class MiniGalleryUIServiceProvider {}
+
+public extension MiniGalleryUIServiceProvider {
+    class func getMiniGalleryUIViewController(items: [GalleryItem], delegate: MiniGallerySelectionDelegate? = nil) -> UIViewController {
         let miniGalleryUIViewController = MiniGalleryViewController.loadFromStoryboard()
         miniGalleryUIViewController.set(items: items)
+        miniGalleryUIViewController.delegate = delegate
         return miniGalleryUIViewController
     }
 }

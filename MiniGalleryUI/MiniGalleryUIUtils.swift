@@ -17,6 +17,34 @@ public struct GalleryItem: Codable, Hashable {
     public let videoUrl: URL
 }
 
+extension Array where Element: Hashable {
+    func next(of item: Element) -> Element? {
+        return searchAdjacent(item: item, function: +)
+    }
+    
+    func previous(of item: Element) -> Element? {
+        return searchAdjacent(item: item, function: -)
+    }
+    
+    func element(of index: Int) -> Element? {
+        if withinRange(of: index) {
+            return self[index]
+        }
+        return nil
+    }
+    
+    private func searchAdjacent(item: Element, function: (_ lhs: Int, _ rhs: Int) -> Int) -> Element? {
+        if let index = firstIndex(of: item), withinRange(of: function(index, 1)) {
+            return self[index - 1]
+        }
+        return nil
+    }
+    
+    private func withinRange(of index: Int) -> Bool {
+        return index >= 0 && index < count
+    }
+}
+
 func loadImage(imageUrl: URL, completionHandler: @escaping (URL, UIImage?) -> Void ) {
     if let image = imageCache.object(forKey: imageUrl.absoluteString as NSString) {
         completionHandler(imageUrl, image)
@@ -34,6 +62,8 @@ func loadImage(imageUrl: URL, completionHandler: @escaping (URL, UIImage?) -> Vo
         }
     }
 }
+
+/* Not used, uncomment if necessary
 
 class CacheManager {
     
@@ -77,3 +107,4 @@ class CacheManager {
         return file
     }
 }
+ */

@@ -10,7 +10,9 @@ import Foundation
 import AVKit
 
 class MiniGalleryVideoPlayerController: AVPlayerViewController {
+    
     let item: GalleryItem
+    
     private var playerLooper: AVPlayerLooper?
     
     override func viewDidLoad() {
