@@ -19,3 +19,4 @@ To use it in you own project
 var items: [GalleryItem] // your data source
 let vc = MiniGalleryUIServiceProvider.getMiniGalleryUIViewController(items: items)
 ```
+if you want to track user interaction in this UI component, pass additional `delegate` parameter to the above function to get coresponding callback
