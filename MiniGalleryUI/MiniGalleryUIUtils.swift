@@ -17,7 +17,7 @@ public struct GalleryItem: Codable, Hashable {
     public let videoUrl: URL
 }
 
-func loadImage(imageUrl: URL,  completionHandler: @escaping (URL, UIImage?) -> Void ) {
+func loadImage(imageUrl: URL, completionHandler: @escaping (URL, UIImage?) -> Void ) {
     if let image = imageCache.object(forKey: imageUrl.absoluteString as NSString) {
         completionHandler(imageUrl, image)
     } else {
@@ -48,7 +48,6 @@ class CacheManager {
     }()
     
     func getFileWith(url: URL, completionHandler: @escaping (Result<URL, Error>) -> Void ) {
-        
         
         let file = directoryFor(url: url)
         

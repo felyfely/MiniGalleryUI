@@ -71,7 +71,6 @@ class MiniGalleryVideoPageViewController: UIPageViewController, UIPageViewContro
         dataSource = self
         delegate = self
        
-        
     }
     
 }

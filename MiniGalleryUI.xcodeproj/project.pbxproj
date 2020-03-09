@@ -88,6 +88,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5BA69F502415421000D3F284 /* Build configuration list for PBXNativeTarget "MiniGalleryUI" */;
 			buildPhases = (
+				5B71E17A241607C50042F7EB /* Swift Lint */,
 				5BA69F432415421000D3F284 /* Headers */,
 				5BA69F442415421000D3F284 /* Sources */,
 				5BA69F452415421000D3F284 /* Frameworks */,
@@ -145,6 +146,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5B71E17A241607C50042F7EB /* Swift Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swift Lint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5BA69F442415421000D3F284 /* Sources */ = {
