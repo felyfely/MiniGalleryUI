@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B71E17C24160B730042F7EB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5B71E17B24160B730042F7EB /* README.md */; };
 		5BA69F4D2415421000D3F284 /* MiniGalleryUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BA69F4B2415421000D3F284 /* MiniGalleryUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5BA69F592415427900D3F284 /* MiniGalleryUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BA69F532415427900D3F284 /* MiniGalleryUI.storyboard */; };
 		5BA69F5A2415427900D3F284 /* MiniGalleryUIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA69F542415427900D3F284 /* MiniGalleryUIUtils.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B71E17B24160B730042F7EB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		5BA69F482415421000D3F284 /* MiniGalleryUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MiniGalleryUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BA69F4B2415421000D3F284 /* MiniGalleryUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MiniGalleryUI.h; sourceTree = "<group>"; };
 		5BA69F4C2415421000D3F284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 		5BA69F4A2415421000D3F284 /* MiniGalleryUI */ = {
 			isa = PBXGroup;
 			children = (
+				5B71E17B24160B730042F7EB /* README.md */,
 				5BA69F532415427900D3F284 /* MiniGalleryUI.storyboard */,
 				5BA69F582415427900D3F284 /* MiniGalleryUIServiceProvider.swift */,
 				5BA69F542415427900D3F284 /* MiniGalleryUIUtils.swift */,
@@ -141,6 +144,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B71E17C24160B730042F7EB /* README.md in Resources */,
 				5BA69F592415427900D3F284 /* MiniGalleryUI.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
