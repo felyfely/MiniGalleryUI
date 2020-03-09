@@ -12,8 +12,7 @@ github "felyfely/MiniGalleryUI" "master"
 
 ## Usage
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.<br />
-To use it in you own project
+Use a single interface for displaying a gallery UI component
 ###### Swift
 ```swift
 var items: [GalleryItem] // your data source

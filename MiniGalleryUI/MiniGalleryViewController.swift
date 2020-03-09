@@ -30,6 +30,12 @@ class MiniGalleryCollectionViewCoverCell: UICollectionViewCell {
         }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        coverImageView.layer.shadowColor = UIColor.black.cgColor
+        coverImageView.layer.shadowOpacity = 0.5
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         transform = .identity
