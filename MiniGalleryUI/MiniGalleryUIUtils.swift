@@ -29,7 +29,7 @@ extension Array where Element: Hashable {
     
     private func searchAdjacent(item: Element, function: (_ lhs: Int, _ rhs: Int) -> Int) -> Element? {
         if let index = firstIndex(of: item), withinRange(of: function(index, 1)) {
-            return self[index - 1]
+            return self[function(index, 1)]
         }
         return nil
     }
