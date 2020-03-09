@@ -37,10 +37,6 @@ class MiniGalleryCollectionViewCoverCell: UICollectionViewCell {
     }
 }
 
-public protocol MiniGallerySelectionDelegate: class {
-    func didSelect(item: GalleryItem, at index: Int, from viewController: UIViewController)
-}
-
 class MiniGalleryViewController: UIViewController {
     
     var items = [GalleryItem]()
@@ -79,7 +75,9 @@ class MiniGalleryViewController: UIViewController {
         
         // add select action to next runloop
         DispatchQueue.main.async {
-            self.select(at: IndexPath.init(row: 0, section: 0), selectPage: false)
+            if !self.items.isEmpty {
+                self.select(at: IndexPath.init(row: 0, section: 0), selectPage: false)
+            }
         }
     }
     
@@ -101,6 +99,9 @@ class MiniGalleryViewController: UIViewController {
             pageController?.select(at: item, forward: indexPath.row > (lastSelectedIndexPath?.row ?? 0))
         }
         lastSelectedIndexPath = indexPath
+        if let item = items.element(of: indexPath.row) {
+            delegate?.didSelect(item: item, at: indexPath.row, from: self)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -142,7 +143,7 @@ extension MiniGalleryViewController: UICollectionViewDataSource, UICollectionVie
         return 0
     }
     
-    /// change paging behaviour
+    /// change paging behaviour so that all card will be centered
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         guard let collectionView = scrollView as? UICollectionView else { return }
         let proposedContentOffset = targetContentOffset.pointee

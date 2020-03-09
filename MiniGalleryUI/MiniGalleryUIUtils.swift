@@ -11,12 +11,6 @@ import UIKit
 let imageCache = NSCache<NSString, UIImage>()
 let currentBundle = Bundle.init(for: MiniGalleryUIServiceProvider.self)
 
-public struct GalleryItem: Codable, Hashable {
-    public let id: Int
-    public let imageUrl: URL
-    public let videoUrl: URL
-}
-
 extension Array where Element: Hashable {
     func next(of item: Element) -> Element? {
         return searchAdjacent(item: item, function: +)

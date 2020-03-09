@@ -19,3 +19,15 @@ public extension MiniGalleryUIServiceProvider {
         return miniGalleryUIViewController
     }
 }
+
+/// a data structure required for display mini gallery UI
+public struct GalleryItem: Codable, Hashable {
+    public let id: Int
+    public let imageUrl: URL
+    public let videoUrl: URL
+}
+
+/// if additional action is required for selection, use this protocal to track the state
+public protocol MiniGallerySelectionDelegate: class {
+    func didSelect(item: GalleryItem, at index: Int, from viewController: UIViewController)
+}
